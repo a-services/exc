@@ -1,0 +1,55 @@
+= exc.war: web utility to check logs
+
+== Configuration file `exc.properties`
+
+When started in web container this utility tries to find configuration file
+with the names of log files to display.
+
+Here is how the name of property file will be found out:
+
+. Load properties from user's home folder, file name will be `~/exc.properties`.
+
+. If `spring.profiles.active` environment variable is defined,
+  then file name will be `~/exc-<env>.properties`.
+
+.Example of `.exc` configuration file
+----
+dev1=/home/user/tomcat-dev/my-app.log
+dev1.name=DEV my-app.log
+
+dev2=/home/user/tomcat-dev/logs/catalina.out
+dev2.name=DEV catalina.out
+
+uat=/home/user/tomcat-uat/my-app.log
+uat.name=UAT my-app.log
+----
+
+Here we have 3 log files to work with, so welcome page of the app will
+display the following table:
+
+|===
+| DEV my-app.log   | /exc/exc?name=dev1
+| DEV catalina.out | /exc/exc?name=dev2
+| UAT my-app.log   | /exc/exc?name=uat
+|===
+
+Each link can be clicked to open the list of exceptions in this particular log.
+
+Exception can be clicked as well to see the appropriate part of log with current line highlighted.
+
+First or last line of the log in browser window can be also clicked to scroll the log up or down.
+
+== Flows
+
+- link:diagrams/start.html[List of log files]
+- link:diagrams/exc.html[List of exceptions]
+- link:diagrams/block.html[Piece of log]
+- link:diagrams/pat.html[Patterns in log]
+
+== Links
+
+Tomcat 8.5 Docs::
+https://tomcat.apache.org/tomcat-8.5-doc/
+
+Servlet 3.1 API::
+https://tomcat.apache.org/tomcat-8.5-doc/servletapi/index.html

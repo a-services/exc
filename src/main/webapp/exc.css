@@ -1,0 +1,75 @@
+/* common */
+
+.tt {
+    font-family: monospace;
+}
+
+.cur {
+    background-color: aqua;
+}
+
+.nounder {
+    text-decoration: none;
+}
+
+/* index.jsp */
+
+body {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+td {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.bluetag {
+    background-color: #eef;
+}
+
+.exc-table {
+    border-width: 1px;
+}
+
+/* exceptions.jsp */
+
+th {
+    background-color: silver;
+}
+
+.exc-table .lno {
+    color: Gray;
+}
+
+.exc-table .time {
+    color: BlueViolet;
+}
+
+.exc-table .cmt {
+    color: BlueViolet;
+}
+
+/* block.jsp */
+
+.block .num {
+    color: Silver;
+}
+
+.block .mark {
+    color: navy;
+}
+
+/* pattern.jsp */
+
+.match {
+    background-color: aqua;
+}
+
+.indent {
+    padding-left: 3em;
+}
+
+.pat .lno {
+    color: Silver;
+}
