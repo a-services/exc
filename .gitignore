@@ -1,6 +1,8 @@
 bin/
 build/
 gradle/
+.gradle/
+
 .classpath
 .project
 README.html
