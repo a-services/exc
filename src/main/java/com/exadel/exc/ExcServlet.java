@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -34,6 +35,9 @@ public class ExcServlet extends HttpServlet {
 			Properties pp = loadProperties();
 			String pName = getRequestParameter("name", IN_NAME, request);
 			String inName = expand(pp.getProperty(pName));
+
+			Map<String,String> logStamps = (Map<String,String>)request.getSession().getAttribute("logStamps");
+			tse.setDateFormat(logStamps.get(pName));
 
 			List<Exc> result;
 			try {

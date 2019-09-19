@@ -19,11 +19,13 @@ public class SimpleTimestampExtractor implements TimestampExtractor {
 	 */
 	private static final int LEN = 24;
 
-	private static final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-	private static final SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static final SimpleDateFormat df3 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
 	Date date;
+	SimpleDateFormat df;
+
+	@Override
+	public void setDateFormat(String dformat) {
+		df = new SimpleDateFormat(dformat==null? "yyyy-MM-dd HH:mm:ss,SSS": dformat);
+	}
 
 	@Override
 	public String extractTimestamp(String line) {
@@ -48,15 +50,7 @@ public class SimpleTimestampExtractor implements TimestampExtractor {
 		try {
 			return df.parse(tstamp);
 		} catch (ParseException e) {
-		    try {
-		        return df2.parse(tstamp);
-		    } catch (ParseException e2) {
-                try {
-                    return df3.parse(tstamp);
-                } catch (ParseException e3) {
-                    return new Date(0);
-                }
-		    }
+            return new Date(0);
 		}
 	}
 

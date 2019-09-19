@@ -27,30 +27,35 @@ public class StartServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException 
+			HttpServletResponse response) throws ServletException, IOException
 	{
 		try {
 			Properties pp = loadProperties();
-			
+
 			List<String> logFiles = new ArrayList<String>();
 			Map<String,String> logNames = new HashMap<String,String>();
+			Map<String,String> logStamps = new HashMap<String,String>();
 			for (String key: pp.stringPropertyNames()) {
-			    if (!key.endsWith(".name")) {
-			        logFiles.add(key);
-			    } else {
+			    if (key.endsWith(".name")) {
 			        logNames.put(key.substring(0, key.length()-".name".length()), pp.getProperty(key));
+				} else
+				if (key.endsWith(".tstamp")) {
+			        logStamps.put(key.substring(0, key.length()-".tstamp".length()), pp.getProperty(key));
+				} else {
+			        logFiles.add(key);
 			    }
 			}
 			Collections.sort(logFiles);
-			
+
 			for (String key: logFiles) {
 			    if (logNames.get(key)==null) {
 			        logNames.put(key,key);
 			    }
 		    }
-		    
+
 			request.setAttribute("logFiles", logFiles);
 			request.setAttribute("logNames", logNames);
+			request.getSession().setAttribute("logStamps", logStamps);
 			request.getRequestDispatcher("index.jsp")
 					.forward(request, response);
 

@@ -11,7 +11,7 @@ LinkedList<Exc> exceptions = (LinkedList<Exc>) request.getAttribute("exceptions"
 <head>
   <title>Log Exceptions</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="exc.css">
+  <style><%@include file="exc.css"%></style>
 </head>
 <body>
 

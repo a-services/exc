@@ -7,9 +7,11 @@ public interface TimestampExtractor {
 	String extractTimestamp(String line);
 
 	Date parse(String tstamp);
-	
+
 	Date getTimestamp();
-	
+
 	String extractComment(String line);
-	
+
+	void setDateFormat(String dformat);
+
 }

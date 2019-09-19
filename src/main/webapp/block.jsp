@@ -19,9 +19,9 @@
 %>
 <html>
 <head>
-  <title>Piece of Log</title>
+  <title>Log <%= n1 %>-<%= n2 %></title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="exc.css">
+  <style><%@include file="exc.css"%></style>
 </head>
 <body>
 
@@ -50,7 +50,11 @@
    if (markLine) {
      out.print("<span style=\"mark\">");
    }
+   */
+
    out.print(lines[k-n1]+"<br>");
+
+   /*
    if (olamLine) {
      out.print("</span>");
    }

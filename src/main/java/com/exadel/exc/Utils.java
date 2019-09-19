@@ -2,8 +2,10 @@ package com.exadel.exc;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,19 +23,18 @@ import javax.servlet.http.HttpSession;
  */
 public class Utils {
 
-    /**
+	/**
 	 * Property name which value is the path to log file.
 	 */
 	public static String IN_NAME;
 
 	/**
-	 * Load properties from user's home folder, file name will be `~/exc.properties`.
-	 * If `spring.profiles.active` environment variable is defined,
-	 * then file name will be `~/exc-<env>.properties`.
+	 * Load properties from user's home folder, file name will be
+	 * `~/exc.properties`. If `spring.profiles.active` environment variable is
+	 * defined, then file name will be `~/exc-<env>.properties`.
 	 */
 	public static Properties loadProperties() throws IOException {
-		String profile = System.getProperty("spring.profiles.active");
-		String propFileName = System.getProperty("user.home") + "/.exc" + (profile != null ? "-" + profile : "")+".properties";
+		String propFileName = getPropFileName();
 		Properties pp = new Properties();
 
 		/* Configure logs here */
@@ -52,6 +53,36 @@ public class Utils {
 	}
 
 	/**
+	 * Load string from file.
+	 */
+	public static String loadStr(String fname) throws FileNotFoundException, IOException {
+		FileInputStream in = new FileInputStream(fname);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		int count = 0;
+		final int BUF_SIZE = 8 * 1024;
+		byte[] buffer = new byte[BUF_SIZE];
+		while ((count = in.read(buffer, 0, BUF_SIZE)) > 0)
+			out.write(buffer, 0, count);
+		out.flush();
+		in.close();
+		return out.toString();
+	}
+
+	/**
+	 * Save string to file.
+	 */
+	public static void saveStr(String fname, String text) throws IOException {
+		PrintWriter out = new PrintWriter(new FileOutputStream(fname));
+		out.print(text);
+		out.close();
+	}
+
+	public static String getPropFileName() {
+		String profile = System.getProperty("spring.profiles.active");
+		return System.getProperty("user.home") + "/.exc" + (profile != null ? "-" + profile : "");
+	}
+
+	/**
 	 * Create error log in home folder.
 	 */
 	public static String appendToErrorLog(String errorMessage) {
@@ -63,7 +94,7 @@ public class Utils {
 			out.print(tstamp + ": " + errorMessage);
 			out.close();
 		} catch (IOException e) {
-			System.out.println(tstamp + ": Error writing to `" + fileName +"`: " + e);
+			System.out.println(tstamp + ": Error writing to `" + fileName + "`: " + e);
 		}
 		return fileName;
 	}
@@ -92,8 +123,7 @@ public class Utils {
 	public static int countLines(String inName, String pName, HttpSession session) {
 		int lno = 0;
 		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					new FileInputStream(inName), "UTF-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(inName), "UTF-8"));
 			while (in.ready()) {
 				String line = in.readLine();
 				if (line == null) {

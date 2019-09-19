@@ -19,7 +19,7 @@ System.out.println("[pattern.jsp] lines.size()="+lines.size());
 <head>
     <title>Piece of Log</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="exc.css">
+    <style><%@include file="exc.css"%></style>
 </head>
 <body>
 
