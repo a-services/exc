@@ -37,7 +37,9 @@ public class ExcServlet extends HttpServlet {
 			String inName = expand(pp.getProperty(pName));
 
 			Map<String,String> logStamps = (Map<String,String>)request.getSession().getAttribute("logStamps");
-			tse.setDateFormat(logStamps.get(pName));
+			if (logStamps!=null) {
+				tse.setDateFormat(logStamps.get(pName));
+			}
 
 			List<Exc> result;
 			try {
