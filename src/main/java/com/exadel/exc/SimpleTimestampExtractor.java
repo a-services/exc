@@ -20,11 +20,13 @@ public class SimpleTimestampExtractor implements TimestampExtractor {
 	private static final int LEN = 24;
 
 	Date date;
-	SimpleDateFormat df;
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss,SSS");
 
 	@Override
 	public void setDateFormat(String dformat) {
-		df = new SimpleDateFormat(dformat==null? "yyyy-MM-dd HH:mm:ss,SSS": dformat);
+		if (dformat!=null) {
+			df = new SimpleDateFormat(dformat);
+		}
 	}
 
 	@Override
