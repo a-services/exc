@@ -60,7 +60,7 @@ LinkedList<Exc> exceptions = (LinkedList<Exc>) request.getAttribute("exceptions"
 <p>
 
 <p>
-<a href=".">Back to other log files</a>
+<a href="home">Back to other log files</a>
 <p>
 
 </body>
