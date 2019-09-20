@@ -2,7 +2,6 @@
 <%
 List<String> logFiles  = (List<String>) request.getAttribute("logFiles"); // list of log file codes
 Map<String,String> logNames = (Map<String,String>) request.getAttribute("logNames"); // mapping log file code to description
-System.out.println("--- Path: " + (new java.io.File("").getCanonicalPath()));
 %>
 <!DOCTYPE html>
 <html lang="en">
