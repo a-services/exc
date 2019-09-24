@@ -51,7 +51,7 @@ Map<String,String> logNames = (Map<String,String>) request.getAttribute("logName
   <p>Exception can be clicked to see appropriate part of log.<br />
     Current line will be highlighted.<br />First or last line of log in browser can be clicked to scroll the log.</p>
 
-  <p><small>Version 20/Sep/2019, see on <a href="https://github.com/a-services/exc">GitHub</a></small></p>
+  <p><small>Version 24/Sep/2019, see on <a href="https://github.com/a-services/exc">GitHub</a></small></p>
 </body>
 
 </html>
