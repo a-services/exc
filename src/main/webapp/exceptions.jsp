@@ -54,7 +54,7 @@ LinkedList<Exc> exceptions = (LinkedList<Exc>) request.getAttribute("exceptions"
 <p>
   <form action="block" method="post">
     Find time: <input type="text" name="tstamp" size="25">
-    <input type="hidden" value="<%= inName %>">
+    <input type="hidden" name="name" value="<%= pName %>">
     <input type="submit" value="Submit">
   </form>
 <p>
