@@ -78,8 +78,12 @@ public class Utils {
 	}
 
 	public static String getPropFileName() {
-		String profile = System.getProperty("spring.profiles.active");
-		return System.getProperty("user.home") + "/.exc" + (profile != null ? "-" + profile : "");
+		String configFile = System.getenv("EXC_CONFIG");
+		if (configFile == null) {
+			String profile = System.getProperty("spring.profiles.active");
+			configFile = System.getProperty("user.home") + "/.exc" + (profile != null ? "-" + profile : "");
+		}
+		return configFile;
 	}
 
 	/**
